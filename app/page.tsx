@@ -1,8 +1,35 @@
+import { Footer } from "@/components/home/footer";
+import { Header } from "@/components/home/Header";
 import { MovieCard } from "@/components/home/movie-card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex justify-center items-center flex-col">
+      <Header />
+      <div className="mt-6 w-360">
+        <Carousel>
+          <CarouselContent>
+            <CarouselItem>
+              <img className="w-360" src="head-photo.jpg" />
+            </CarouselItem>
+            <CarouselItem>
+              <img className="w-360" src="head-photo.jpg" />
+            </CarouselItem>
+            <CarouselItem>
+              <img className="w-360" src="head-photo.jpg" />
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious className="left-10" />
+          <CarouselNext className="right-10" />
+        </Carousel>
+      </div>
       <h1 className="mt-10 text-lg">Upcoming </h1>
       <div className="flex gap-8 mt-[32px]">
         <MovieCard title="Dear Santa" score={6.9} image="photo1.jpg" />
@@ -92,6 +119,7 @@ export default function Home() {
           image="photo30.png"
         />
       </div>
+      <Footer></Footer>
     </div>
   );
 }

@@ -20,7 +20,8 @@ export const MovieCard = ({ title, image, score }: MovieCardProps) => {
       </CardContent>
       <CardFooter className="flex flex-col items-start p-2 h-25">
         <CardDescription className="flex ">
-          <FaStar color="#FDE047" /> <span className="text-black">{score}</span>
+          <FaStar color="#FDE047" />{" "}
+          <span className="terxt-foreground">{score}</span>
           <span className="text-">/10</span>
         </CardDescription>
         <CardTitle className="pt-1 text-lg font-normal not-italic">
