@@ -1,4 +1,3 @@
-import { Footer } from "@/components/home/footer";
 import { Header } from "@/components/home/Header";
 import { MovieCard } from "@/components/home/movie-card";
 import {
@@ -8,6 +7,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -17,7 +26,7 @@ export default function Home() {
         <Carousel>
           <CarouselContent>
             <CarouselItem>
-              <img className="w-360" src="head-photo.jpg" />
+              <div className="w-360" />
             </CarouselItem>
             <CarouselItem>
               <img className="w-360" src="head-photo.jpg" />
@@ -30,7 +39,12 @@ export default function Home() {
           <CarouselNext className="right-10" />
         </Carousel>
       </div>
-      <h1 className="mt-10 text-lg">Upcoming </h1>
+      <div className="flex items-center justify-between w-320">
+        <h1 className="mt-10 text-lg">Upcoming </h1>
+        <button className="flex">
+          See more <ChevronRight />
+        </button>
+      </div>
       <div className="flex gap-8 mt-[32px]">
         <MovieCard title="Dear Santa" score={6.9} image="photo1.jpg" />
         <MovieCard
@@ -57,7 +71,12 @@ export default function Home() {
           image="photo10.png"
         />
       </div>
-      <h1 className="mt-10 text-lg">Popular</h1>
+      <div className="flex items-center justify-between w-320">
+        <h1 className="mt-10 text-lg">Popular </h1>
+        <button className="flex">
+          See more <ChevronRight />
+        </button>
+      </div>
       <div className="flex gap-8 mt-[32px]">
         <MovieCard
           title="The Shawshank Redemption"
@@ -88,7 +107,12 @@ export default function Home() {
           image="photo20.png"
         />
       </div>
-      <h1 className="mt-10 text-lg">Top Rated </h1>
+      <div className="flex items-center justify-between w-320">
+        <h1 className="mt-10 text-lg">To Rated </h1>
+        <button className="flex">
+          See more <ChevronRight />
+        </button>
+      </div>
       <div className="flex gap-8 mt-[32px]">
         <MovieCard title="Pulp Fiction" score={6.9} image="photo21.jpg" />
         <MovieCard
@@ -119,7 +143,6 @@ export default function Home() {
           image="photo30.png"
         />
       </div>
-      <Footer></Footer>
     </div>
   );
 }

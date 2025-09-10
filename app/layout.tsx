@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/home/theme-provider";
+import { Footer } from "@/components/home/footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,7 +26,7 @@ export default function RootLayout({
   <html lang="en" suppressHydrationWarning></html>;
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="">
+      <body className="flex justify-center items-center flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -33,6 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Footer></Footer>
         </ThemeProvider>
       </body>
     </html>
