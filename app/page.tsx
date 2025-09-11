@@ -1,147 +1,59 @@
-import { Header } from "@/components/home/Header";
 import { MovieCard } from "@/components/home/movie-card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Scroll } from "@/components/home/scroll";
 
-export default function Home() {
+type MovieType = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  vote_average: number;
+};
+
+type movieResponseType = {
+  page: number;
+  totalPages: number;
+  results: MovieType[];
+};
+
+export default async function Home() {
+  const getUpcomingMovies = async () => {
+    const res = await fetch(
+      "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        },
+      }
+    );
+    const data = await res.json();
+    return data;
+  };
+
+  const upcomingMovies: movieResponseType = await getUpcomingMovies();
+
+  console.log(upcomingMovies);
+
   return (
-    <div className="flex justify-center items-center flex-col">
-      <Header />
-      <div className="mt-6 w-360">
-        <Carousel>
-          <CarouselContent>
-            <CarouselItem>
-              <div className="w-360" />
-            </CarouselItem>
-            <CarouselItem>
-              <img className="w-360" src="head-photo.jpg" />
-            </CarouselItem>
-            <CarouselItem>
-              <img className="w-360" src="head-photo.jpg" />
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious className="left-10" />
-          <CarouselNext className="right-10" />
-        </Carousel>
+    <div>
+      <div>
+        <Scroll></Scroll>
       </div>
-      <div className="flex items-center justify-between w-320">
-        <h1 className="mt-10 text-lg">Upcoming </h1>
-        <button className="flex">
-          See more <ChevronRight />
-        </button>
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard title="Dear Santa" score={6.9} image="photo1.jpg" />
-        <MovieCard
-          title="How To Train Your Dragon Live Action"
-          score={6.9}
-          image="photo2.jpg"
-        />
-        <MovieCard title="Alien Romulus" score={6.9} image="photo3.jpg" />
-        <MovieCard title="From the Ashes" score={6.9} image="photo4.jpg" />
-        <MovieCard title="Space Dogg" score={6.9} image="photo5.png" />
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard title="The Order" score={6.9} image="photo6.jpg" />
-        <MovieCard title="Y2K" score={6.9} image="photo7.jpg" />
-        <MovieCard
-          title="Solo Leveling: ReAwakening"
-          score={6.9}
-          image="photo8.jpg"
-        />
-        <MovieCard title="Get Away" score={6.9} image="photo9.jpg" />
-        <MovieCard
-          title="Sonic the Hedgehog 3"
-          score={6.9}
-          image="photo10.png"
-        />
-      </div>
-      <div className="flex items-center justify-between w-320">
-        <h1 className="mt-10 text-lg">Popular </h1>
-        <button className="flex">
-          See more <ChevronRight />
-        </button>
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard
-          title="The Shawshank Redemption"
-          score={6.9}
-          image="photo11.jpg"
-        />
-        <MovieCard title="The Godfather" score={6.9} image="photo12.jpg" />
-        <MovieCard title="The Dark Knight" score={6.9} image="photo13.jpg" />
-        <MovieCard title="12 Angry Men" score={6.9} image="photo14.jpg" />
-        <MovieCard
-          title="The Lord of the Rings: The  Return of the King"
-          score={6.9}
-          image="photo15.jpg"
-        />
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard title="Internstellar" score={6.9} image="photo16.png" />
-        <MovieCard title="Se7en" score={6.9} image="photo17.png" />
-        <MovieCard
-          title="It’s a Wonderful life"
-          score={6.9}
-          image="photo18.png"
-        />
-        <MovieCard title="Seven samurai" score={6.9} image="photo19.png" />
-        <MovieCard
-          title="The Silence of the Lambs"
-          score={6.9}
-          image="photo20.png"
-        />
-      </div>
-      <div className="flex items-center justify-between w-320">
-        <h1 className="mt-10 text-lg">To Rated </h1>
-        <button className="flex">
-          See more <ChevronRight />
-        </button>
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard title="Pulp Fiction" score={6.9} image="photo21.jpg" />
-        <MovieCard
-          title="The Lord of the Rings: Fellowship of the Kings"
-          score={6.9}
-          image="photo22.jpg"
-        />
-        <MovieCard
-          title="The Good, the Bad and the Ugly"
-          score={6.9}
-          image="photo23.png"
-        />
-        <MovieCard title="Forrest Gump" score={6.9} image="photo24.jpg" />
-        <MovieCard title="Fight Club" score={6.9} image="photo25.jpg" />
-      </div>
-      <div className="flex gap-8 mt-[32px]">
-        <MovieCard
-          title="Saving Private Ryan"
-          score={6.9}
-          image="photo26.png"
-        />
-        <MovieCard title="City of God" score={6.9} image="photo27.png" />
-        <MovieCard title="The Green Mile" score={6.9} image="photo28.png" />
-        <MovieCard title="Life is Beautiful" score={6.9} image="photo29.png" />
-        <MovieCard
-          title="Terminator 2: Judgement Day"
-          score={6.9}
-          image="photo30.png"
-        />
+      <div className="flex gap-4 flex-wrap mt-20 w-360 items-center justify-center">
+        {upcomingMovies.results.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            title={movie.title}
+            score={movie.vote_average}
+            image={movie.poster_path}
+          />
+        ))}
       </div>
     </div>
   );

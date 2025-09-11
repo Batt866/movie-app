@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/home/theme-provider";
 import { Footer } from "@/components/home/footer";
+import { Header } from "@/components/home/Header";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="flex justify-center items-center flex-col">
+        <Header />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

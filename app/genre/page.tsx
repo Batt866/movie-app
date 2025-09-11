@@ -6,17 +6,42 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+
 const Genres = () => {
-  const GENRES = ["ACTION", "ADVENTURE", "Animation", "Comedy"];
+  const GENRES = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Biography",
+    "Comedy",
+    "Crime",
+    "Documentary",
+    "Drama",
+    "Family",
+    "Fantasy",
+    "Flim-Noir",
+    "Game-Show",
+    "History",
+    "Horror",
+    "Music",
+    "Musical",
+    "Mystery",
+    "News",
+    "Reality-TV",
+    "Romance",
+    "Sci-Fi",
+    "Short",
+    "Sport",
+    "Talk-Show",
+    "Thriller",
+    "War",
+    "Western",
+  ];
   return (
     <div>
       <div className="flex gap-3">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="border-1 rounded-[6px] w-24 h-9">Genres</button>
-          </DropdownMenuTrigger>
+          <DropdownMenuTrigger></DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>Genres</DropdownMenuLabel>
             <span>See lists of movies by genre</span>
