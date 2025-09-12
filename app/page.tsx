@@ -1,5 +1,6 @@
 import { MovieCard } from "@/components/home/movie-card";
 import { Scroll } from "@/components/home/scroll";
+import { ChevronRight } from "lucide-react";
 
 type MovieType = {
   adult: boolean;
@@ -45,15 +46,56 @@ export default async function Home() {
       <div>
         <Scroll></Scroll>
       </div>
-      <div className="flex gap-4 flex-wrap mt-20 w-360 items-center justify-center">
-        {upcomingMovies.results.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            score={movie.vote_average}
-            image={movie.poster_path}
-          />
-        ))}
+      <div>
+        {" "}
+        <div className="flex items-center justify-between max-w-330">
+          <p className="font-semibold text-2xl mt-20 ml-28">Upcoming</p>
+          <button className="flex  mt-20">
+            See more <ChevronRight />
+          </button>
+        </div>
+        <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
+          {upcomingMovies.results.slice(0, 10).map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              score={movie.vote_average}
+              image={movie.poster_path}
+            />
+          ))}
+        </div>
+        <div className="flex items-center justify-between max-w-330">
+          <p className="font-semibold text-2xl mt-5 ml-28">Upcoming</p>
+          <button className="flex  mt-20">
+            See more <ChevronRight />
+          </button>
+        </div>
+        <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
+          {upcomingMovies.results.slice(0, 10).map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              score={movie.vote_average}
+              image={movie.poster_path}
+            />
+          ))}
+        </div>
+        <div className="flex items-center justify-between max-w-330">
+          <p className="font-semibold text-2xl mt-5 ml-28">Upcoming</p>
+          <button className="flex  mt-20">
+            See more <ChevronRight />
+          </button>
+        </div>
+        <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
+          {upcomingMovies.results.slice(0, 10).map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              score={movie.vote_average}
+              image={movie.poster_path}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

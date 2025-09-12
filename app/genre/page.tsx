@@ -46,7 +46,7 @@ const Genres = () => {
             <DropdownMenuLabel>Genres</DropdownMenuLabel>
             <span>See lists of movies by genre</span>
             <DropdownMenuSeparator />
-            <div className="flex">
+            <div className="flex border-1 border-black rounded-full">
               {GENRES.map((genre) => (
                 <DropdownMenuItem>{genre}</DropdownMenuItem>
               ))}

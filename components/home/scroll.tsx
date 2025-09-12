@@ -25,8 +25,8 @@ export const Scroll = () => {
                 the Land of Oz. After an encounter with the Wonderful Wizard of
                 Oz, their friendship reaches a crossroads.{" "}
               </h6>
-              <button className="flex bg-white text-black rounded-[6px] h-10 items-center">
-                <img className="w-4 h-4" src="play.svg" />
+              <button className="flex bg-white text-black rounded-[6px] h-10 w-35 jsu items-center mt-3 gap-2 ">
+                <img className="w-4.5 h-4.5" src="play.svg" />
                 Watch Trailer
               </button>
             </div>{" "}
