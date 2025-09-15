@@ -16,3 +16,7 @@ export type movieResponseType = {
   totalPages: number;
   results: MovieType[];
 };
+export type GenerType = {
+  id: number;
+  name: string;
+};

@@ -1,60 +1,68 @@
+import { getMoviesByGenreId } from "@/components/home/gener-data";
+import { MovieCard } from "@/components/home/movie-card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { movieResponseType } from "@/types";
 
-const Genres = () => {
-  const GENRES = [
-    "Action",
-    "Adventure",
-    "Animation",
-    "Biography",
-    "Comedy",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "Flim-Noir",
-    "Game-Show",
-    "History",
-    "Horror",
-    "Music",
-    "Musical",
-    "Mystery",
-    "News",
-    "Reality-TV",
-    "Romance",
-    "Sci-Fi",
-    "Short",
-    "Sport",
-    "Talk-Show",
-    "Thriller",
-    "War",
-    "Western",
-  ];
+type GenerPageProps = {
+  searchParams: Promise<{ id: string }>;
+};
+
+const Genre = async ({ searchParams }: GenerPageProps) => {
+  const params = await searchParams;
+  const id = params.id;
+  const filteredMoviesResponse: movieResponseType = await getMoviesByGenreId(
+    id
+  );
+  console.log("Moveiadnasid", filteredMoviesResponse);
+
   return (
-    <div>
-      <div className="flex gap-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger></DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Genres</DropdownMenuLabel>
-            <span>See lists of movies by genre</span>
-            <DropdownMenuSeparator />
-            <div className="flex border-1 border-black rounded-full">
-              {GENRES.map((genre) => (
-                <DropdownMenuItem>{genre}</DropdownMenuItem>
-              ))}
+    <div className="mt-10 ">
+      <span className="font-semibold text-3xl">Search filter</span>
+      <div className="flex">
+        <div className="mt-10 mr-20">
+          <h1 className="font-semibold text-2xl">Geners</h1>
+          <h5 className="text-foreground">See lists of movies by genre</h5>
+          <div></div>
+        </div>
+        <div className="flex flex-wrap w-300 gap-3 mt-10">
+          {filteredMoviesResponse.results.map((movie) => (
+            <div>
+              <MovieCard
+                title={movie.title}
+                score={movie.vote_average}
+                image={movie.poster_path}
+              ></MovieCard>
             </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          ))}
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">1</PaginationLink>
+                <PaginationLink href="#">2</PaginationLink>
+                <PaginationLink href="#">3</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
     </div>
   );
 };
-export default Genres;
+export default Genre;
