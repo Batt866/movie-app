@@ -9,6 +9,8 @@ export type MovieType = {
   release_date: string;
   title: string;
   vote_average: number;
+  genres: GenerType[];
+  name: string;
 };
 
 export type movieResponseType = {
@@ -19,4 +21,12 @@ export type movieResponseType = {
 export type GenerType = {
   id: number;
   name: string;
+};
+export type Cast = {
+  name: string;
+  order: number;
+};
+export type Crew = {
+  job: string;
+  order: number;
 };

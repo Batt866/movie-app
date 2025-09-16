@@ -26,7 +26,7 @@ export const Footer = () => {
             </div>
           </div>
           <div className="mt-6 ml-120 flex gap-3">
-            <img src="Wifi icon (1).svg" />
+            <img src="Wifi icon (2).svg" />
             <div>
               <h6 className="font-normal text-sm text-white">Phone:</h6>
               <h6 className="font-normal text-sm text-white">

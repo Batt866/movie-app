@@ -16,7 +16,7 @@ export async function GenreDropdown() {
   const genersResponse = await getMovieGenres();
 
   return (
-    <div className="flex gap-3 ">
+    <div className="flex gap-3">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="border-1 rounded-[6px] w-24 h-9">Genres</button>

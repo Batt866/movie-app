@@ -11,7 +11,7 @@ export const Header = () => {
       </div>
       <div className="flex gap-3">
         <GenreDropdown />
-        <Input className="w-95" />
+        <Input className="w-95" placeholder="search" />
       </div>
       <ThemeToggler />
     </div>

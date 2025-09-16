@@ -57,6 +57,7 @@ export default async function HomePage() {
         <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
           {upcomingMovies.results.slice(0, 10).map((movie) => (
             <MovieCard
+              id={movie.id}
               key={movie.id}
               title={movie.title}
               score={movie.vote_average}
@@ -73,6 +74,7 @@ export default async function HomePage() {
         <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
           {upcomingMovies.results.slice(0, 10).map((movie) => (
             <MovieCard
+              id={movie.id}
               key={movie.id}
               title={movie.title}
               score={movie.vote_average}
@@ -89,6 +91,7 @@ export default async function HomePage() {
         <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
           {upcomingMovies.results.slice(0, 10).map((movie) => (
             <MovieCard
+              id={movie.id}
               key={movie.id}
               title={movie.title}
               score={movie.vote_average}
