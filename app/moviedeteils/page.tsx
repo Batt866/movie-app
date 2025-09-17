@@ -1,7 +1,13 @@
-import { GenerType, MovieType } from "@/types";
-import { getactorsname, getMoviesById } from "@/components/home/gener-data";
-import { MovieCard } from "@/components/home/movie-card";
+import { Directorname, movieResponseType, MovieType } from "@/types";
+import {
+  getactorsname,
+  getMoviesById,
+  moreLikeThis,
+} from "@/components/home/gener-data";
 import { FaStar } from "react-icons/fa";
+import { ChevronRight } from "lucide-react";
+import { log } from "console";
+import { MovieCard } from "@/components/home/movie-card";
 type GenerPageProps = {
   searchParams: Promise<{ id: string }>;
 };
@@ -12,12 +18,13 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
 
   const filteredMoviesResponse: MovieType = await getMoviesById(id);
 
-  const MoviesResponse: MovieType = await getactorsname(id);
-  console.log("jujigchidiin id", MoviesResponse);
+  const MoviesResponse: Directorname = await getactorsname(id);
 
+  const MoreLike: movieResponseType = await moreLikeThis(id);
+  console.log(MoreLike);
   return (
     <div>
-      <div className="mt-20 flex justify-between max-w-270">
+      <div className="mt-20 flex justify-between max-w-310">
         <div>
           <div className="font-bold text-3xl">
             {filteredMoviesResponse.title}
@@ -37,31 +44,63 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
       <div className="flex gap-10 mt-5">
         <img
           src={`https://image.tmdb.org/t/p/w500/${filteredMoviesResponse.poster_path}`}
-          className="w-72 h-107"
+          className="w-80 h-110"
         />
         <img
           src={`https://image.tmdb.org/t/p/original/${filteredMoviesResponse.backdrop_path}`}
-          className="w-190 h-107"
+          className="w-220 h-110"
         ></img>
       </div>
 
       <div className="flex gap-5 mt-8">
         {filteredMoviesResponse.genres.map((genre) => {
           return (
-            <div className="border-1 rounded-full w-20 flex items-center justify-center">
+            <div className="border-1 rounded-full w-20 flex justify-center">
               {genre.name}
             </div>
           );
         })}
       </div>
-      <div>{MoviesResponse.name}</div>
-      <div className="mt-8">{filteredMoviesResponse.overview}</div>
-      <MovieCard
-        title={filteredMoviesResponse.title}
-        score={filteredMoviesResponse.vote_average}
-        image={filteredMoviesResponse.poster_path}
-        id={filteredMoviesResponse.id}
-      ></MovieCard>
+      <div className="mt-8 max-w-310">{filteredMoviesResponse.overview}</div>
+      <div className="mt-5">
+        <div className="flex gap-10">
+          <div className="font-bold text-base">Director </div>
+          <div>{MoviesResponse.cast[0].name}</div>
+        </div>
+        <div className="flex gap-10 mt-3">
+          <div className="font-bold text-base">Writer </div>
+          <div className="flex gap-3">
+            {MoviesResponse.crew.slice(0, 3).map((crew) => (
+              <div>{crew.name}</div>
+            ))}
+          </div>
+        </div>
+        <div className="flex gap-10 mt-3">
+          <div className="font-bold text-base">Actor </div>
+          <div className="flex justify-center gap-3">
+            {MoviesResponse.crew.slice(3, 6).map((crew) => (
+              <div>{crew.name}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-between max-w-310 mt-8">
+        <span className="font-semibold text-2xl">More like this</span>
+        <button className="flex">
+          {" "}
+          see more <ChevronRight />
+        </button>
+      </div>
+      <div className="flex max-w-310 gap-6 mt-9">
+        {MoreLike.results.slice(0, 5).map((results) => (
+          <MovieCard
+            title={results.title}
+            score={results.vote_average}
+            image={results.poster_path}
+            id={results.id}
+          ></MovieCard>
+        ))}
+      </div>
     </div>
   );
 };

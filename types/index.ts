@@ -22,11 +22,12 @@ export type GenerType = {
   id: number;
   name: string;
 };
-export type Cast = {
-  name: string;
-  order: number;
+export type Directorname = {
+  cast: Crewtype[];
+  crew: Crewtype[];
 };
-export type Crew = {
+
+export type Crewtype = {
   job: string;
-  order: number;
+  name: string;
 };
