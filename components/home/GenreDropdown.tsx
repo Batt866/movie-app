@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { getMovieGenres } from "./gener-data";
+import { getMovieGenres } from "./get-data";
 import { Badge } from "../ui/badge";
 import { GenerType } from "@/types";
 

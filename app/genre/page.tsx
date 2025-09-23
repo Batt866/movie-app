@@ -1,7 +1,4 @@
-import {
-  getMovieGenres,
-  getMoviesByGenreId,
-} from "@/components/home/gener-data";
+import { getMovieGenres, getMoviesByGenreId } from "@/components/home/get-data";
 import { MovieCard } from "@/components/home/movie-card";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,14 +45,14 @@ const Genre = async ({ searchParams }: GenerPageProps) => {
                     key={genre.id}
                     href={`/genre?id=${genre.id}&name=${genre.name}&page=${1}`}
                   >
-                    <div>
+                    <>
                       <Button className="flex items-center gap-2 rounded-full border-1 border-[#E4E4E7] h-6">
                         <span className="text-[12px] font-semibold ">
                           {genre.name}
                         </span>
                         <ChevronRight className="w-4 h-4" />
                       </Button>
-                    </div>
+                    </>
                   </Link>
                 )
               )}
@@ -64,14 +61,13 @@ const Genre = async ({ searchParams }: GenerPageProps) => {
         </div>
         <div className="flex flex-wrap w-300 gap-12 mt-10">
           {filteredMoviesResponse.results.slice(0, 12).map((movie) => (
-            <div>
-              <MovieCard
-                id={movie.id}
-                title={movie.title}
-                score={movie.vote_average}
-                image={movie.poster_path}
-              ></MovieCard>
-            </div>
+            <MovieCard
+              key={id}
+              id={movie.id}
+              title={movie.title}
+              score={movie.vote_average}
+              image={movie.poster_path}
+            ></MovieCard>
           ))}
           <Pagination className="flex justify-end">
             <PaginationContent>
