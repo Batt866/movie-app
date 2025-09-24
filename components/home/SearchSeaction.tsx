@@ -37,7 +37,12 @@ export const SearchSection = () => {
 
   return (
     <div>
-      <Popover open={isOpen}>
+      <Popover
+        open={isOpen}
+        onOpenChange={() => {
+          setIsOpen(false);
+        }}
+      >
         <PopoverTrigger>
           <Input
             value={searchValue}
@@ -79,7 +84,7 @@ export const SearchSection = () => {
                 </div>
                 <div className="ml-[370px] mt-[71px] mb-[10px] absolute bg-transparent">
                   {" "}
-                  <Link href={`/moviebyid/${movie.id}`}>
+                  <Link href={`/moviedeteils?id=${movie.id}`}>
                     {" "}
                     <Button>See more</Button>
                   </Link>
@@ -89,9 +94,9 @@ export const SearchSection = () => {
           })}
           <div className=" border flex justify-center rounded-md py-2">
             {foundMovies?.results.length === 0 ? (
-              <Link href={`/Search/${searchValue}`}>Not results found </Link>
+              <Link href={`/Search?id=${searchValue}`}>Not results found </Link>
             ) : (
-              <Link href={`/Search/${searchValue}`}>
+              <Link href={`/Search?id=${searchValue}`}>
                 See all results for "{searchValue}"
               </Link>
             )}

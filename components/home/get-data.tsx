@@ -114,3 +114,18 @@ export const getMovies = async () => {
   console.log("daifjdsjvsbnskfb", data);
   return data;
 };
+export const getUpcomingMovies = async (Listname: string, page: string) => {
+  console.log("ENV", process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY);
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${Listname}?language=en-US&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
+};

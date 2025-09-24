@@ -7,9 +7,10 @@ import {
 } from "@/components/home/get-data";
 import { FaStar } from "react-icons/fa";
 import { ChevronRight, Key } from "lucide-react";
-import { log } from "console";
+
 import { MovieCard } from "@/components/home/movie-card";
 import { TrailerDialog } from "@/components/home/TrailerDialog";
+import Link from "next/link";
 type GenerPageProps = {
   searchParams: Promise<{ id: string }>;
 };
@@ -25,6 +26,9 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
   const filteredMoviesResponse: MovieType = await getMoviesById(id);
 
   const MoviesResponse: Directorname = await getactorsname(id);
+
+  console.log("VIDEOS!!!", videos);
+  console.log("RESPONSE", MoviesResponse);
 
   const MoreLike: movieResponseType = await moreLikeThis(id);
 
@@ -60,12 +64,21 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
             className="w-220 h-110"
           ></img>
           <div className="absolute inset-0 flex justify-start">
-            <TrailerDialog videoKey={videos.results[0].key}></TrailerDialog>
+            <TrailerDialog
+              videoKey={videos.results.length > 0 ? videos.results[0].key : ""}
+            >
+              <div className="flex items-center gap-4 mt-90 ml-5">
+                <button className="w-10 h-10 bg-white flex items-center rounded-full justify-center">
+                  <img className="text-black w-5 h-5" src="play.png" />{" "}
+                </button>
+                Play Trailer
+              </div>
+            </TrailerDialog>
           </div>
         </div>
       </div>
 
-      <div className="flex gap-5 mt-8 ml-75">
+      <div className="flex gap-5 w-310 m-auto mt-10">
         {filteredMoviesResponse.genres.map((genre) => {
           return (
             <div className="border-1 rounded-full w-20 flex justify-center">
@@ -83,7 +96,11 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
           <div className="flex justify-start flex-col">
             <div className="flex gap-10">
               <div className="font-bold text-base">Director </div>
-              <div>{MoviesResponse.cast[0].name}</div>
+              <div>
+                {MoviesResponse.cast.length > 0
+                  ? MoviesResponse.cast[0].name
+                  : "Unknown"}
+              </div>
             </div>
             <div className="flex gap-10 mt-3">
               <div className="font-bold text-base">Writer </div>

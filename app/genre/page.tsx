@@ -26,10 +26,9 @@ const Genre = async ({ searchParams }: GenerPageProps) => {
   );
 
   const GenreMoviesResponse = await getMovieGenres();
-  console.log("Moveiadnasid", filteredMoviesResponse);
 
   return (
-    <div className="mt-10 w-360">
+    <div className="mt-10 w-360 m-auto">
       <span className="font-semibold text-3xl">Search filter</span>
       <div className="flex">
         <div className="mt-10 mr-10">

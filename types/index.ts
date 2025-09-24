@@ -23,6 +23,9 @@ export type GenerType = {
   id: number;
   name: string;
 };
+export type GenerTypeResponsetype = {
+  genres: GenerType[];
+};
 export type Directorname = {
   cast: Crewtype[];
   crew: Crewtype[];

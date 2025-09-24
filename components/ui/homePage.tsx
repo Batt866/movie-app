@@ -2,6 +2,7 @@ import { MovieCard } from "@/components/home/movie-card";
 import { MovieCarousel } from "@/components/home/scroll";
 import { movieResponseType } from "@/types";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export default async function HomePage() {
   const getUpcomingMovies = async () => {
@@ -38,8 +39,6 @@ export default async function HomePage() {
   const upcomingMovies: movieResponseType = await getUpcomingMovies();
   const NowplayingMovies: movieResponseType = await getNowplayingMovies();
 
-  console.log(upcomingMovies);
-
   return (
     <div>
       <div className="flex justify-center">
@@ -50,9 +49,12 @@ export default async function HomePage() {
         <div className="flex justify-center">
           <div className="flex items-center justify-between w-330">
             <p className="font-semibold text-2xl mt-20 ml-15">Upcoming</p>
-            <button className="flex  mt-20">
-              See more <ChevronRight />
-            </button>
+            <Link href={`/moreLike?id=upcoming`}>
+              <button className="flex  mt-20">
+                See more
+                <ChevronRight />
+              </button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-center">
@@ -71,35 +73,16 @@ export default async function HomePage() {
         <div className="flex justify-center">
           <div className="flex items-center justify-between w-330">
             <p className="font-semibold text-2xl mt-5 ml-15">Upcoming</p>
-            <button className="flex  mt-20">
-              See more <ChevronRight />
-            </button>
+            <Link href={`/moreLike?id=upcoming`}>
+              <button className="flex  mt-20">
+                See more <ChevronRight />
+              </button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-center">
           <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
             {upcomingMovies.results.slice(10, 20).map((movie) => (
-              <MovieCard
-                id={movie.id}
-                key={movie.id}
-                title={movie.title}
-                score={movie.vote_average}
-                image={movie.poster_path}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="flex items-center justify-between w-330">
-            <p className="font-semibold text-2xl mt-5 ml-15">Upcoming</p>
-            <button className="flex  mt-20">
-              See more <ChevronRight />
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
-            {upcomingMovies.results.slice(20, 30).map((movie) => (
               <MovieCard
                 id={movie.id}
                 key={movie.id}

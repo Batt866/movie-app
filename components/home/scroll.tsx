@@ -38,16 +38,16 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
 
   return (
     <div>
-      <Carousel setApi={setApi} className="w-screen">
+      <Carousel setApi={setApi} className="w-360">
         <CarouselContent>
-          {movies.map((movie, index) => (
+          {movies.slice(0, 5).map((movie, index) => (
             <MovieCarouselItem key={index} movie={movie} />
           ))}
         </CarouselContent>
         <CarouselPrevious className="left-13" />
         <CarouselNext className="right-13" />
       </Carousel>
-      <div className="flex gap-2 ">
+      <div className="flex gap-2 mt-10 mx-auto justify-center">
         {Array.from({ length: count }).map((_, index) => (
           <div
             onClick={() => {
@@ -89,21 +89,33 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
   }, []);
 
   return (
-    <CarouselItem className="flex justify-center w-360 h-150">
+    <CarouselItem className="flex justify-center w-360 h-160 mt-10">
       <div>
         <Card className="w-360 h-150 flex justify-center">
-          <CardContent className="flex aspect-video  items-center justify-center flex-col relative ">
+          <CardContent className="flex aspect-video  flex-col relative w-360 h-160">
             <div className="flex justify-center">
               <img
-                className="flex justify-center items-center w-360 h-150"
+                className="flex justify-center items-center w-360 h-160"
                 src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
               ></img>
             </div>
-            <div className="absolute">
-              <span className="text-4xl font-semibold absolute">
-                {movie.title}
-              </span>
-              <TrailerDialog videoKey={trailerKey} />
+            <div className="absolute mt-40 ml-35">
+              <span>Now Playing:</span>
+              <span className="text-4xl font-semibold flex">{movie.title}</span>
+              <div className="flex items-center mt-3">
+                <FaStar className="text-[#FDE047] w-5 h-5 "></FaStar>
+                {movie.vote_average}/10
+              </div>
+              <div className="w-100 mt-4">{movie.overview}</div>
+
+              <TrailerDialog videoKey={trailerKey}>
+                <div className="flex items-center mt-10">
+                  <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
+                    <img className="text-black w-6 h-6" src="play.png" />
+                    Watch Trailer
+                  </button>
+                </div>
+              </TrailerDialog>
             </div>
           </CardContent>
         </Card>
