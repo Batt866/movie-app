@@ -11,12 +11,15 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 type GenerPageProps = {
-  searchParams: Promise<{ id: string }>;
+  searchParams: Promise<{ id: string; page: string }>;
 };
 const moreLikeThis = async ({ searchParams }: GenerPageProps) => {
   const params = await searchParams;
   const id = params.id;
-  const MoreLike: movieResponseType = await getUpcomingMovies("upcoming", "1");
+  const page = params.page || "1";
+  const MoreLike: movieResponseType = await getUpcomingMovies(id, page);
+
+  const currentUrl = `/moreLike?id=${id}&`;
   return (
     <div>
       <span className="flex w-300 m-auto mt-10 font-semibold text-4xl">
@@ -32,21 +35,40 @@ const moreLikeThis = async ({ searchParams }: GenerPageProps) => {
             id={movie.id}
           ></MovieCard>
         ))}
-        <Pagination className="flex justify-end mt-2.5">
+        <Pagination className="flex justify-end">
           <PaginationContent>
+            {page !== "1" && (
+              <>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href={`${currentUrl}page=${Number(page) - 1}`}
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink
+                    href={`${currentUrl}page=${Number(page) - 1}`}
+                  >
+                    {Number(page) - 1}
+                  </PaginationLink>
+                </PaginationItem>
+              </>
+            )}
+
             <PaginationItem>
-              <PaginationPrevious href="#" />
+              <PaginationLink isActive href="#">
+                {page}
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-              <PaginationLink href="#">2</PaginationLink>
-              <PaginationLink href="#">3</PaginationLink>
+              <PaginationLink href={`${currentUrl}page=${Number(page) + 1}`}>
+                {Number(page) + 1}
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext href="#" />
+              <PaginationNext href={`${currentUrl}page=${Number(page) + 1}`} />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

@@ -15,13 +15,18 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 type GenerPageProps = {
-  searchParams: Promise<{ id: string }>;
+  searchParams: Promise<{ id: string; page: string }>;
 };
 
 const Search = async ({ searchParams }: GenerPageProps) => {
   const params = await searchParams;
   const id = params.id;
-  const filteredMoviesResponse: movieResponseType = await getSearchedMovies(id);
+  const page = params.page || "1";
+  const filteredMoviesResponse: movieResponseType = await getSearchedMovies(
+    id,
+    page
+  );
+  const currentUrl = `/Search?id=${id}&`;
   const GenreMoviesResponse: GenerTypeResponsetype = await getMovieGenres();
   return (
     <div className="mt-10 w-360 m-auto flex">
@@ -29,7 +34,7 @@ const Search = async ({ searchParams }: GenerPageProps) => {
         <span className="font-semibold text-3xl">Search results</span>
         <div className="mt-10 gap-1 flex">
           {" "}
-          {filteredMoviesResponse.results.length} <h2> results for</h2>"{}"
+          {filteredMoviesResponse.results.length} <h2> results for</h2>"{id}"
         </div>
         <div className="flex flex-wrap w-210 gap-8 mt-5 border-r">
           {filteredMoviesResponse.results.slice(0, 9).map((movie) => (
@@ -42,21 +47,40 @@ const Search = async ({ searchParams }: GenerPageProps) => {
             ></MovieCard>
           ))}
         </div>
-        <Pagination className="flex justify-end mt-2.5">
+        <Pagination className="flex justify-end">
           <PaginationContent>
+            {page !== "1" && (
+              <>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href={`${currentUrl}page=${Number(page) - 1}`}
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink
+                    href={`${currentUrl}page=${Number(page) - 1}`}
+                  >
+                    {Number(page) - 1}
+                  </PaginationLink>
+                </PaginationItem>
+              </>
+            )}
+
             <PaginationItem>
-              <PaginationPrevious href="#" />
+              <PaginationLink isActive href="#">
+                {page}
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-              <PaginationLink href="#">2</PaginationLink>
-              <PaginationLink href="#">3</PaginationLink>
+              <PaginationLink href={`${currentUrl}page=${Number(page) + 1}`}>
+                {Number(page) + 1}
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext href="#" />
+              <PaginationNext href={`${currentUrl}page=${Number(page) + 1}`} />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

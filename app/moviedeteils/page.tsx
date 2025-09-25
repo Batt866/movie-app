@@ -20,15 +20,10 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
 
   const id = Movieidpramas.id;
   const videos: movieResponseType = await TrailMovie(id);
-  // const Trailer = videos.find(
-  //   (v: any) => v.site === "YouTube" && v.type === "Trailer"
-  // );
+
   const filteredMoviesResponse: MovieType = await getMoviesById(id);
 
   const MoviesResponse: Directorname = await getactorsname(id);
-
-  console.log("VIDEOS!!!", videos);
-  console.log("RESPONSE", MoviesResponse);
 
   const MoreLike: movieResponseType = await moreLikeThis(id);
 
@@ -82,6 +77,7 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
         {filteredMoviesResponse.genres.map((genre) => {
           return (
             <div className="border-1 rounded-full w-20 flex justify-center">
+              {genre.id}
               {genre.name}
             </div>
           );

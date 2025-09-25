@@ -12,9 +12,11 @@ export async function getMovieGenres() {
   const data = await res.json();
   return data;
 }
-export const getMoviesByGenreId = async (genrelds: string) => {
+export const getMoviesByGenreId = async (genrelds: string, page?: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genrelds}&page=${1}`,
+    `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genrelds}&page=${
+      page || "1"
+    }`,
     {
       method: "GET",
       headers: {
@@ -84,9 +86,9 @@ export const TrailMovie = async (id: string) => {
   return data;
 };
 
-export const getSearchedMovies = async (searchValue: string) => {
+export const getSearchedMovies = async (searchValue: string, page: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${1}`,
+    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${page}`,
     {
       method: "GET",
       headers: {
@@ -118,6 +120,36 @@ export const getUpcomingMovies = async (Listname: string, page: string) => {
   console.log("ENV", process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY);
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${Listname}?language=en-US&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+export const getNowplayingMovies = async () => {
+  console.log("ENV", process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY);
+  const res = await fetch(
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
+export const UpcomingMovies = async () => {
+  console.log("ENV", process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY);
+  const res = await fetch(
+    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
     {
       method: "GET",
       headers: {
