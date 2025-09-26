@@ -29,14 +29,14 @@ const Search = async ({ searchParams }: GenerPageProps) => {
   const currentUrl = `/Search?id=${id}&`;
   const GenreMoviesResponse: GenerTypeResponsetype = await getMovieGenres();
   return (
-    <div className="mt-10 w-360 m-auto flex">
+    <div className="mt-10 max-w-360 m-auto flex max-md:flex-col">
       <div>
-        <span className="font-semibold text-3xl">Search results</span>
-        <div className="mt-10 gap-1 flex">
+        <span className="font-semibold text-3xl md:ml-10">Search results</span>
+        <div className="mt-10 gap-1 flex md:ml-10">
           {" "}
           {filteredMoviesResponse.results.length} <h2> results for</h2>"{id}"
         </div>
-        <div className="flex flex-wrap w-210 gap-8 mt-5 border-r">
+        <div className="flex gap-4 flex-wrap items-center mt-5 border-r md:ml-10">
           {filteredMoviesResponse.results.slice(0, 9).map((movie) => (
             <MovieCard
               key={movie.id}
@@ -94,7 +94,7 @@ const Search = async ({ searchParams }: GenerPageProps) => {
               See lists of movies by genre
             </div>
           </div>
-          <div className="flex flex-wrap w-78 h-50 gap-5 justify-start mt-5 ml-10">
+          <div className="flex flex-wrap w-78 gap-5 justify-start mt-5 ml-10">
             {GenreMoviesResponse.genres.map((genre) => (
               <Link
                 key={genre.id}

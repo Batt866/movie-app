@@ -1,54 +1,133 @@
+import { Mail, Phone } from "lucide-react";
+
 export const Footer = () => {
   return (
-    <div className="flex justify-center ">
-      <div className="bg-indigo-700 w-360 h-70 mt-12.5 flex">
-        <div className="flex">
-          <div className="flex-col">
-            <div className="flex items-center mt-10 ml-25 gap-2 ">
-              <img src="footerLogo.svg" />
-              <span className="text-white">Movie Z</span>
-            </div>
-            <h6 className="font-normal text-sm text-white ml-25 mt-3 flex">
+    <footer className="w-full bg-indigo-700 mt-[51px] sm:py-10 py-0 text-[#FAFAFA] h-[290px ] ">
+      <div className="hidden justify-between max-w-[1280px] m-auto sm:flex">
+        <div className="gap-[12px]">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M5.83268 1.66663V18.3333M14.166 1.66663V18.3333M1.66602 9.99996H18.3327M1.66602 5.83329H5.83268M1.66602 14.1666H5.83268M14.166 14.1666H18.3327M14.166 5.83329H18.3327M3.48268 1.66663H16.516C17.5193 1.66663 18.3327 2.47998 18.3327 3.48329V16.5166C18.3327 17.5199 17.5193 18.3333 16.516 18.3333H3.48268C2.47936 18.3333 1.66602 17.5199 1.66602 16.5166V3.48329C1.66602 2.47998 2.47936 1.66663 3.48268 1.66663Z"
+                stroke="#FAFAFA"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <p className="text-[#FAFAFA] italic font-extrabold ml-[8px]">
+              Movie Z
+            </p>
+          </div>
+          <div>
+            <p className="text-[#FAFAFA]">
               © 2024 Movie Z. All Rights Reserved.
-            </h6>
+            </p>
           </div>
-          <div className="ml-120">
-            <h6 className="font-normal text-sm text-white  mt-10">
-              Contact Information
-            </h6>
+        </div>
+        <div className="flex gap-[96px] justify-center">
+          <div className="flex flex-col">
+            <div>
+              <div>
+                <p>Contact Information</p>
+              </div>
+              <div className="flex items-center gap-[12px] mt-[12px]">
+                <div>
+                  <Mail strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p>Email:</p>
+                  <p>support@movieZ.com</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-[12px] mt-[12px]">
+              <div>
+                <Phone strokeWidth={1.5} />
+              </div>
+              <div>
+                <p>Phone:</p>
+                <p>+976 (11) 123-4567</p>
+              </div>
+            </div>
+          </div>
 
-            <div className=" mt-3 flex gap-3 ">
-              <img className="w-5 h-5" src="Wifi icon.svg" />
-              <div>
-                <h6 className="font-normal text-sm text-white">Email:</h6>
-                <h6 className="font-normal text-sm text-white">
-                  support@movieZ.com
-                </h6>
-              </div>
-            </div>
-            <div className="mt-6 flex gap-3">
-              <img className="w-5 h-5" src="Wifi icon (2).svg" />
-              <div>
-                <h6 className="font-normal text-sm text-white">Phone:</h6>
-                <h6 className="font-normal text-sm text-white">
-                  +976 (11) 123-4567
-                </h6>
-              </div>
-            </div>
-          </div>
-          <div className="mt-10">
-            <div className=" text-white font-normal text-sm ml-30">
-              Follow us
-            </div>
-            <div className="flex ml-30 text-white gap-3 mt-3">
-              <h2 className=" font-normal text-sm">Facebook</h2>
-              <h2 className=" font-normal text-sm">Instagram</h2>
-              <h2 className=" font-normal text-sm">Twitter</h2>
-              <h2 className=" font-normal text-sm">Youtube</h2>
+          <div>
+            <p>Follow us</p>
+            <div className="flex gap-[12px]">
+              <p>Facebook</p>
+              <p>Instagram</p>
+              <p>Twitter</p>
+              <p>Youtube</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col justify-between  m-auto sm:hidden py-10 px-5">
+        <div className="gap-[12px]">
+          <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M5.83268 1.66663V18.3333M14.166 1.66663V18.3333M1.66602 9.99996H18.3327M1.66602 5.83329H5.83268M1.66602 14.1666H5.83268M14.166 14.1666H18.3327M14.166 5.83329H18.3327M3.48268 1.66663H16.516C17.5193 1.66663 18.3327 2.47998 18.3327 3.48329V16.5166C18.3327 17.5199 17.5193 18.3333 16.516 18.3333H3.48268C2.47936 18.3333 1.66602 17.5199 1.66602 16.5166V3.48329C1.66602 2.47998 2.47936 1.66663 3.48268 1.66663Z"
+                stroke="#FAFAFA"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <p className="text-[#FAFAFA] italic font-extrabold ml-[8px]">
+              Movie Z
+            </p>
+          </div>
+          <p className="text-[#FAFAFA]">© 2024 Movie Z. All Rights Reserved.</p>
+        </div>
+        <div className="flex  justify-between mt-7 items-center">
+          <div className="flex flex-col">
+            <p>Contact Information</p>
+            <div>
+              <div className="flex items-center gap-[12px] mt-[12px]">
+                <div>
+                  <Mail strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p>Email:</p>
+                  <p>support@movieZ.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-[12px] mt-[12px]">
+                <div>
+                  <Phone strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p>Phone:</p>
+                  <p>+976 (11) 123-4567</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="gap-[12px]">
+              <p>Follow us</p>
+              <p>Facebook</p>
+              <p>Instagram</p>
+              <p>Twitter</p>
+              <p>Youtube</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };

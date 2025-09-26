@@ -17,7 +17,7 @@ export default async function HomePage() {
       </div>
       <>
         <div className="flex justify-center">
-          <div className="flex items-center justify-between w-330">
+          <div className="max-sm:w-127 flex items-center justify-between w-330">
             <p className="font-semibold text-2xl mt-20 ml-15">Upcoming</p>
             <Link href={`/moreLike?id=upcoming`}>
               <button className="flex  mt-20">
@@ -41,11 +41,12 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="flex items-center justify-between w-330">
-            <p className="font-semibold text-2xl mt-5 ml-15">Upcoming</p>
+          <div className="max-sm:w-127 flex items-center justify-between w-330">
+            <p className="font-semibold text-2xl mt-20 ml-15">Upcoming</p>
             <Link href={`/moreLike?id=upcoming`}>
               <button className="flex  mt-20">
-                See more <ChevronRight />
+                See more
+                <ChevronRight />
               </button>
             </Link>
           </div>

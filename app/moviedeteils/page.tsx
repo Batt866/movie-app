@@ -51,7 +51,7 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
       <div className="flex gap-10 mt-5 justify-center">
         <img
           src={`https://image.tmdb.org/t/p/w500/${filteredMoviesResponse.poster_path}`}
-          className="w-80 h-110"
+          className="w-80 h-110 max-md:hidden"
         />
         <div className="relative">
           <img
@@ -72,24 +72,32 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
           </div>
         </div>
       </div>
-
-      <div className="flex gap-5 w-310 m-auto mt-10">
-        {filteredMoviesResponse.genres.map((genre) => {
-          return (
-            <div className="border-1 rounded-full w-20 flex justify-center">
-              {genre.id}
-              {genre.name}
+      <div className="flex w-360 justify-center">
+        <div className="flex gap-3 mt-3 ">
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${filteredMoviesResponse.poster_path}`}
+            className="w-80 h-110 sm:hidden"
+          />
+          <div className="">
+            <div className="flex gap-5 m-auto mt-10">
+              {filteredMoviesResponse.genres.map((genre) => {
+                return (
+                  <div className="border-1 rounded-full w-20 flex justify-center">
+                    {genre.id}
+                    {genre.name}
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-      </div>
-      <div className="flex justify-center">
-        <div>
-          <div className="mt-8 max-w-310">
-            {filteredMoviesResponse.overview}
+            <div className="mt-8 ">{filteredMoviesResponse.overview}</div>
           </div>
+        </div>
+      </div>
+      <div className="max-md:block"></div>
+      <div className="flex sm:justify-start justify-start ml-2">
+        <div className="flex justify-center w-650">
           <div className="mt-5"></div>
-          <div className="flex justify-start flex-col">
+          <div className="flex justify-start flex-col max-md:ml-5">
             <div className="flex gap-10">
               <div className="font-bold text-base">Director </div>
               <div>
@@ -127,7 +135,7 @@ const Moviedetails = async ({ searchParams }: GenerPageProps) => {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="flex w-310 gap-6 mt-9">
+        <div className="flex gap-6 mt-9 flex-wrap sm:justify-center justify-center ml-2">
           {MoreLike.results.slice(0, 5).map((results) => (
             <MovieCard
               key={results.id}

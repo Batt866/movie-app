@@ -38,7 +38,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
 
   return (
     <div>
-      <Carousel setApi={setApi} className="w-360">
+      <Carousel setApi={setApi} className="w-360 max-md:w-120">
         <CarouselContent>
           {movies.slice(0, 5).map((movie, index) => (
             <MovieCarouselItem key={index} movie={movie} />
@@ -89,37 +89,84 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
   }, []);
 
   return (
-    <CarouselItem className="flex justify-center w-360 h-160 mt-10">
+    <div>
       <div>
-        <Card className="w-360 h-150 flex justify-center">
-          <CardContent className="flex aspect-video  flex-col relative w-360 h-160">
-            <div className="flex justify-center">
-              <img
-                className="flex justify-center items-center w-360 h-160"
-                src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-              ></img>
-            </div>
-            <div className="absolute mt-40 ml-35">
-              <span>Now Playing:</span>
-              <span className="text-4xl font-semibold flex">{movie.title}</span>
-              <div className="flex items-center mt-3">
-                <FaStar className="text-[#FDE047] w-5 h-5 "></FaStar>
-                {movie.vote_average}/10
-              </div>
-              <div className="w-100 mt-4">{movie.overview}</div>
-
-              <TrailerDialog videoKey={trailerKey}>
-                <div className="flex items-center mt-10">
-                  <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
-                    <img className="text-black w-6 h-6" src="play.png" />
-                    Watch Trailer
-                  </button>
+        <CarouselItem className="flex justify-center w-360 h-160 mt-10 max-md:hidden">
+          <div>
+            <Card className="w-360 h-150 flex justify-center">
+              <CardContent className="flex aspect-video  flex-col relative w-360 h-160">
+                <div className="flex justify-center">
+                  <img
+                    className="flex justify-center items-center w-360 h-160"
+                    src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                  ></img>
                 </div>
-              </TrailerDialog>
-            </div>
-          </CardContent>
-        </Card>
+                <div className="absolute mt-40 ml-35">
+                  <span>Now Playing:</span>
+                  <span className="text-4xl font-semibold flex">
+                    {movie.title}
+                  </span>
+                  <div className="flex items-center mt-3">
+                    <FaStar className="text-[#FDE047] w-5 h-5 "></FaStar>
+                    {movie.vote_average}/10
+                  </div>
+                  <div className="w-100 mt-4">{movie.overview}</div>
+
+                  <TrailerDialog videoKey={trailerKey}>
+                    <div className="flex items-center mt-10">
+                      <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
+                        <img className="text-black w-6 h-6" src="play.png" />
+                        Watch Trailer
+                      </button>
+                    </div>
+                  </TrailerDialog>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </CarouselItem>
+        <div className="max-md:block hidden mt-10">
+          <div className="flex justify-center">
+            <CarouselItem className="flex w-130 h-45 mt-10 ">
+              <div>
+                <Card className="w-160 h-45 flex justify-center">
+                  <CardContent className="flex aspect-video flex-col relative w-130">
+                    <div className="flex justify-center">
+                      <img
+                        className="flex justify-center items-center w-260 h-60"
+                        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                      ></img>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          </div>
+        </div>
       </div>
-    </CarouselItem>
+      <div>
+        <div className="mt-10 ml-10 md:hidden">
+          <div className="flex items-center justify-between">
+            <span>Now Playing:</span>
+            <div className="flex items-center mt-3">
+              <FaStar className="text-[#FDE047] w-5 h-5 "></FaStar>
+              {movie.vote_average}/10
+            </div>
+          </div>
+          <span className="text-4xl font-semibold flex">{movie.title}</span>
+
+          <div className="w-100 mt-4">{movie.overview}</div>
+
+          <TrailerDialog videoKey={trailerKey}>
+            <div className="flex items-center mt-10">
+              <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
+                <img className="text-black w-6 h-6" src="play.png" />
+                Watch Trailer
+              </button>
+            </div>
+          </TrailerDialog>
+        </div>
+      </div>
+    </div>
   );
 };
