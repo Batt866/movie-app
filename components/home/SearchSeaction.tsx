@@ -65,6 +65,7 @@ export const SearchSection = () => {
                     height={100}
                     width={67}
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
                   />
                 </div>
                 <div>
@@ -94,10 +95,10 @@ export const SearchSection = () => {
           })}
           <div className=" border flex justify-center rounded-md py-2">
             {foundMovies?.results.length === 0 ? (
-              <Link href={`/Search?id=${searchValue}`}>Not results found </Link>
+              <Link href={`/Search?id=${searchValue}`}>No results found</Link>
             ) : (
               <Link href={`/Search?id=${searchValue}`}>
-                See all results for "{searchValue}"
+                {`See all results for "${searchValue}"`}
               </Link>
             )}
           </div>

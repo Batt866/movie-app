@@ -18,8 +18,11 @@ const MoreLikeThisPage = async ({ searchParams }: GenerPageProps) => {
   const id = params.id;
   const page = params.page || "1";
   const MoreLike: movieResponseType = await getUpcomingMovies(id, page);
-
   const currentUrl = `/moreLike?id=${id}&`;
+
+  const moreLikeResults = Array.isArray(MoreLike?.results)
+    ? MoreLike.results
+    : [];
   return (
     <div>
       <span className="flex w-300 m-auto mt-10 font-semibold text-4xl ">
@@ -27,7 +30,7 @@ const MoreLikeThisPage = async ({ searchParams }: GenerPageProps) => {
       </span>
       <div className="flex justify-center">
         <div className="flex gap-4 flex-wrap max-w-360 items-center justify-center mt-5">
-          {MoreLike.results.slice(0, 10).map((movie) => (
+          {moreLikeResults.slice(0, 10).map((movie) => (
             <MovieCard
               key={movie.id}
               title={movie.title}

@@ -67,27 +67,32 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
 export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
   const [trailerKey, setTrailerKey] = React.useState("");
 
-  const getTrailerData = async () => {
-    type TrailerType = {
-      id: string;
-      key: string;
-      type: string;
-    };
-    type TrailerResponseType = {
-      id: number;
-      results: TrailerType[];
-    };
-    const trailerData: TrailerResponseType = await TrailMovie(
-      movie.id.toString()
-    );
-    const trailer = trailerData.results.find((item) => item.type === "Trailer");
-    setTrailerKey(trailer?.key || "");
-  };
-
   React.useEffect(() => {
-    getTrailerData();
-  }, []);
-
+    let mounted = true;
+    const fetchTrailer = async () => {
+      type TrailerType = {
+        id: string;
+        key: string;
+        type: string;
+      };
+      type TrailerResponseType = {
+        id: number;
+        results: TrailerType[];
+      };
+      const trailerData: TrailerResponseType = await TrailMovie(
+        movie.id.toString()
+      );
+      if (!mounted) return;
+      const trailer = trailerData.results.find(
+        (item) => item.type === "Trailer"
+      );
+      setTrailerKey(trailer?.key || "");
+    };
+    fetchTrailer();
+    return () => {
+      mounted = false;
+    };
+  }, [movie.id]);
   return (
     <div>
       <div>
@@ -99,6 +104,7 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
                   <img
                     className="flex justify-center items-center w-360 h-160"
                     src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                    alt={movie.title}
                   ></img>
                 </div>
                 <div className="absolute mt-40 ml-35">
@@ -115,7 +121,11 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
                   <TrailerDialog videoKey={trailerKey}>
                     <div className="flex items-center mt-10">
                       <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
-                        <img className="text-black w-6 h-6" src="play.png" />
+                        <img
+                          className="text-black w-6 h-6"
+                          src="play.png"
+                          alt="play"
+                        />
                         Watch Trailer
                       </button>
                     </div>
@@ -135,6 +145,7 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
                       <img
                         className="flex justify-center items-center w-260 h-60"
                         src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                        alt={movie.title}
                       ></img>
                     </div>
                   </CardContent>
@@ -160,7 +171,7 @@ export const MovieCarouselItem = ({ movie }: { movie: MovieType }) => {
           <TrailerDialog videoKey={trailerKey}>
             <div className="flex items-center mt-10">
               <button className="p-7 h-10 w-auto bg-white flex items-center rounded-md justify-center text-black gap-2">
-                <img className="text-black w-6 h-6" src="play.png" />
+                <img className="text-black w-6 h-6" src="play.png" alt="play" />
                 Watch Trailer
               </button>
             </div>

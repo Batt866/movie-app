@@ -33,8 +33,8 @@ const Search = async ({ searchParams }: GenerPageProps) => {
       <div>
         <span className="font-semibold text-3xl md:ml-10">Search results</span>
         <div className="mt-10 gap-1 flex md:ml-10">
-          {" "}
-          {filteredMoviesResponse.results.length} <h2> results for</h2>"{id}"
+          {filteredMoviesResponse.results.length}{" "}
+          <h2>results for {`"${id}"`}</h2>
         </div>
         <div className="flex gap-4 flex-wrap items-center mt-5 border-r md:ml-10">
           {filteredMoviesResponse.results.slice(0, 9).map((movie) => (

@@ -25,16 +25,36 @@ export async function GenreDropdown() {
           <DropdownMenuLabel className=" ml-4">Genres</DropdownMenuLabel>
           <span className="ml-4">See lists of movies by genre</span>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="hover:!bg-transparent flex-wrap max-w-100 flex gap-3">
-            {genersResponse.genres.map((genre: GenerType) => (
-              <Link key={genre.id} href={`/genre?id=${genre.id}`}>
-                <Badge variant="outline">
-                  {genre.name}
-                  <ChevronRight />
-                </Badge>
-              </Link>
-            ))}
-          </DropdownMenuItem>
+          {(() => {
+            const defaultGenres: GenerType[] = [
+              { id: -1, name: "Action" },
+              { id: -2, name: "Comedy" },
+              { id: -3, name: "Drama" },
+              { id: -4, name: "Horror" },
+              { id: -5, name: "Romance" },
+            ];
+
+            const genres =
+              Array.isArray(genersResponse?.genres) &&
+              genersResponse.genres.length
+                ? genersResponse.genres
+                : defaultGenres;
+
+            return genres.map((genre: GenerType) => (
+              <DropdownMenuItem
+                key={genre.id}
+                asChild
+                className="hover:!bg-transparent"
+              >
+                <Link href={`/genre?id=${genre.id}`}>
+                  <div className="flex items-center gap-3">
+                    <Badge variant="outline">{genre.name}</Badge>
+                    <ChevronRight />
+                  </div>
+                </Link>
+              </DropdownMenuItem>
+            ));
+          })()}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

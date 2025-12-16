@@ -10,10 +10,17 @@ export default async function HomePage() {
   const NowplayingMovies = await getNowplayingMovies();
   const upcomingMovies = await UpcomingMovies();
 
+  const nowPlayingResults = Array.isArray(NowplayingMovies?.results)
+    ? NowplayingMovies.results
+    : [];
+  const upcomingResults = Array.isArray(upcomingMovies?.results)
+    ? upcomingMovies.results
+    : [];
+
   return (
     <div>
       <div className="flex justify-center">
-        <MovieCarousel movies={NowplayingMovies.results}></MovieCarousel>
+        <MovieCarousel movies={nowPlayingResults}></MovieCarousel>
       </div>
       <>
         <div className="flex justify-center">
@@ -29,7 +36,7 @@ export default async function HomePage() {
         </div>
         <div className="flex justify-center">
           <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
-            {upcomingMovies.results.slice(0, 10).map((movie: MovieType) => (
+            {upcomingResults.slice(0, 10).map((movie: MovieType) => (
               <MovieCard
                 id={movie.id}
                 key={movie.id}
@@ -53,7 +60,7 @@ export default async function HomePage() {
         </div>
         <div className="flex justify-center">
           <div className="flex gap-4 flex-wrap  w-360 items-center justify-center mt-5">
-            {upcomingMovies.results.slice(10, 20).map((movie: MovieType) => (
+            {upcomingResults.slice(10, 20).map((movie: MovieType) => (
               <MovieCard
                 id={movie.id}
                 key={movie.id}

@@ -68,6 +68,7 @@ export const moreLikeThis = async (id: string) => {
     }
   );
   const data = await res.json();
+  console.log("daifjdsjvsbnskfb", data);
   return data;
 };
 export const TrailMovie = async (id: string) => {
@@ -82,7 +83,6 @@ export const TrailMovie = async (id: string) => {
     }
   );
   const data = await res.json();
-  console.log("daifjdsjvsbnskfb", data);
   return data;
 };
 
